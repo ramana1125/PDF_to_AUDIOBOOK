@@ -1,4 +1,4 @@
-const API_BASE = 'http://localhost:8000'; // Adjust if needed
+const API_BASE = '';
 
 // DOM Elements
 const voiceGrid = document.getElementById('voice-grid');
