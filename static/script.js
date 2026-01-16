@@ -1,4 +1,4 @@
-const API_BASE = '';
+const API_BASE = 'https://pdf-to-audiobook-1.onrender.com/';
 
 // DOM Elements
 const voiceGrid = document.getElementById('voice-grid');
