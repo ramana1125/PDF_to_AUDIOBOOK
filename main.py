@@ -283,10 +283,11 @@ async def convert_pdf(
         # Let's provide both or just the filename so frontend can decide.
         # Original code returned `download_url`.
         
+        # In main.py, update the return statement in @app.post("/convert")
         return JSONResponse({
             "status": "success", 
-            "download_url": f"http://localhost:8000/download/{output_filename}",
-            "playback_url": f"http://localhost:8000/audio/{output_filename}", 
+            "download_url": f"/download/{output_filename}",
+            "playback_url": f"/audio/{output_filename}", 
             "filename": output_filename
         })
 
