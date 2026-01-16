@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF to Audiobook Converter</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#6366f1',
+                        secondary: '#4f46e5',
+                        dark: '#0f172a',
+                        card: '#1e293b',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-dark text-white min-h-screen flex flex-col items-center py-10 px-4">
+
+    <!-- Header -->
+    <header class="text-center mb-12">
+        <h1 class="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-cyan-400 mb-4">
+            PDF to Audiobook
+        </h1>
+        <p class="text-gray-400 text-lg">Turn your documents into immersive audio stories with AI voices.</p>
+    </header>
+
+    <!-- Main Container -->
+    <main class="w-full max-w-4xl bg-card/50 backdrop-blur-lg rounded-3xl p-8 shadow-2xl border border-white/5">
+
+        <!-- Step 1: Voice Selection -->
+        <section class="mb-10">
+            <h2 class="text-2xl font-semibold mb-6 flex items-center">
+                <span
+                    class="bg-primary/20 text-primary w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">1</span>
+                Select a Voice
+            </h2>
+
+            <div id="voice-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Voice Cards injected by JS -->
+                <div class="animate-pulse bg-white/5 h-24 rounded-xl"></div>
+                <div class="animate-pulse bg-white/5 h-24 rounded-xl"></div>
+                <div class="animate-pulse bg-white/5 h-24 rounded-xl"></div>
+            </div>
+            <input type="hidden" id="selected-voice-id" value="en-US-ken">
+        </section>
+
+        <!-- Step 2: Upload -->
+        <section class="mb-10">
+            <h2 class="text-2xl font-semibold mb-6 flex items-center">
+                <span
+                    class="bg-primary/20 text-primary w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">2</span>
+                Upload PDF
+            </h2>
+
+            <div id="drop-zone"
+                class="border-2 border-dashed border-white/20 rounded-2xl p-10 text-center transition-all hover:border-primary hover:bg-primary/5 cursor-pointer group">
+                <div class="mb-4">
+                    <i
+                        class="fas fa-cloud-upload-alt text-4xl text-gray-500 group-hover:text-primary transition-colors"></i>
+                </div>
+                <p class="text-xl font-medium mb-2">Drag & Drop your PDF here</p>
+                <p class="text-sm text-gray-400">or click to browse</p>
+                <input type="file" id="file-input" class="hidden" accept=".pdf">
+                <div id="file-info" class="mt-4 hidden animate-fade-in text-primary font-medium"></div>
+            </div>
+        </section>
+
+        <!-- Step 3: Action -->
+        <div class="text-center">
+            <button id="convert-btn"
+                class="bg-gradient-to-r from-primary to-secondary px-8 py-4 rounded-xl font-bold text-lg shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:scale-105 transition-all disabled:opacity-50 disabled:cursor-not-allowed">
+                Convert to Audiobook
+            </button>
+        </div>
+
+        <!-- Progress Area -->
+        <div id="progress-area" class="mt-10 hidden">
+            <div class="w-full bg-gray-700 rounded-full h-2.5 mb-4 overflow-hidden">
+                <div id="progress-bar"
+                    class="bg-gradient-to-r from-cyan-400 to-blue-500 h-2.5 rounded-full w-0 transition-all duration-300">
+                </div>
+            </div>
+            <p id="status-text" class="text-center text-sm text-gray-300 animate-pulse">Processing...</p>
+        </div>
+
+        <!-- Result Area -->
+        <div id="result-area"
+            class="mt-10 hidden bg-green-500/10 border border-green-500/20 rounded-xl p-6 text-center animate-fade-in-up">
+            <h3 class="text-xl font-bold text-green-400 mb-4">Conversion Complete!</h3>
+            <p class="text-gray-300 mb-6">Your audiobook is ready.</p>
+
+            <audio id="audio-player" controls class="w-full mb-6">
+                <source src="" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+
+            <a id="download-link" href="#" download
+                class="inline-flex items-center bg-green-600 hover:bg-green-700 px-6 py-3 rounded-lg font-medium transition-colors">
+                <i class="fas fa-download mr-2"></i> Download MP3
+            </a>
+        </div>
+
+    </main>
+
+    <div id="toast"
+        class="fixed bottom-5 right-5 bg-white text-dark px-6 py-4 rounded-xl shadow-2xl translate-y-20 opacity-0 transition-all z-50 font-medium">
+        Message
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+
+</html>
